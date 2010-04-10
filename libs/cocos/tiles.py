@@ -404,7 +404,7 @@ def image_factory(resource, tag):
     filename = resource.find_file(tag.get('file'))
     if not filename:
         raise ResourceError('No file= on <image> tag')
-    image = pyglet.image.load(tag.get('file'))
+    image = pyglet.image.load(filename)
 
     image.properties = _handle_properties(tag)
 

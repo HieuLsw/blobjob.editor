@@ -144,7 +144,7 @@ class ScrollingManager(Layer):
         self._scale = scale
         self._old_focus = None      # disable NOP check
         if self.children:
-            self.set_focus(self.fx, self.fy)
+            self.force_focus(self.fx, self.fy)
     scale = property(lambda s: s._scale, set_scale)
 
     def add(self, child, z=0, name=None):
