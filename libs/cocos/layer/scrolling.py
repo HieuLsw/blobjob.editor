@@ -33,6 +33,7 @@ Two methods are available for setting the map focus:
 '''
 
 from cocos.layer.base_layers import Layer
+from cocos.director import director
 import pyglet
 
 class ScrollableLayer(Layer):
@@ -93,6 +94,7 @@ class ScrollableLayer(Layer):
     is_event_handler = True
     def on_resize(self, width, height):
         self.view_w, self.view_h = width, height
+        print self
         self.set_dirty()
 
 class ScrollingManager(Layer):
@@ -171,7 +173,7 @@ class ScrollingManager(Layer):
         # get the map-space dimensions
         vx, vy, w, h = self.view_x, self.view_y, self.view_w, self.view_h
 
-        #print (int(x), int(y)), (vx, vy, w, h), int(vx + sx * w), int(vy + sy * h)
+#        print (int(x), int(y)), (vx, vy, w, h), int(vx + sx * w), int(vy + sy * h)
 
         # convert screen pixel to map pixel
         return int(vx + sx * w), int(vy + sy * h)
