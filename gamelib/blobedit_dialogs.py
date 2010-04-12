@@ -110,7 +110,7 @@ class ToolBarDialog(DialogNode):
     def _get_file_layout(self):
         layout = kytten.VerticalLayout([
             NoSelectMenu(
-                options=['-New', 'Open', '-Save', 'Quit'],
+                options=['-New', 'Open', 'Save', 'Quit'],
                 on_select=self._on_button_click)
 #                    Button("Open",id ="open", on_click=self._on_button_click),
 #                    Button("Save",id ="save", on_click=self._on_button_click),
@@ -125,7 +125,7 @@ class ToolBarDialog(DialogNode):
 
     def _on_tool_select(self,id):
         print "selected tool %s"%id
-        self.avtive_tool = id
+        self.active_tool = id
         if(self.on_tool_select != None):
             self.on_tool_select(id)
 
@@ -151,7 +151,49 @@ class StatusBarDialog(DialogNode):
                     self.label,
                 ], align=kytten.HALIGN_LEFT)
 
+class TileBarDialog(DialogNode):
+    def __init__(self,tiles=None,on_select=None):
+        self.tiles = tiles
+        self.on_select = on_select
+        self.layout = self._get_layout()
+        self.active_tile = None
+        super(TileBarDialog, self).__init__(kytten.Dialog(
+            kytten.Frame(
+                self.layout
+                ),
+                window=director.window,
+                anchor=kytten.ANCHOR_BOTTOM,
+                theme=gTheme))
 
+    def _get_layout(self):
+        images = []
+        for tileset in self.tiles:
+            print tileset
+            for  id in tileset:
+                tile = tileset[id]
+                images.append(tile)
+
+
+        palette_options = [[],[]]
+        for i,tile in enumerate(images):
+            option = PaletteOption(
+                id = tile.id,
+                image = tile.image,
+                padding = 5,
+                scale_size=20)
+            palette_options[i%2].append(option)
+
+        palette = Palette(palette_options, on_select = self._on_select)
+        layout = kytten.Scrollable(palette)
+
+        return layout
+    def _on_select(self,data):
+        print "selected %s"%data
+        self.active_tile = data
+        if self.on_select != None:
+            self.on_select(data)
+        
+        
 class PopupMessage(DialogNode):
     def __init__(self,text, ok = "Ok"):
         super(PopupMessage,self).__init__(
