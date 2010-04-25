@@ -68,8 +68,9 @@ class ToolBarDialog(DialogNode):
             anchor=kytten.ANCHOR_TOP_LEFT,
             theme=gTheme))
         self.help_texts = {
-            'move' : 'Move the map',
-            'zoom' : 'Zoom in/out: use the mouse scroll',
+            'move'      : 'Move the map.',
+            'zoom'      : 'Zoom in/out: use the mouse scroll.',
+            'pencil'    : 'Use the pencil to draw tiles on the map.',
         }
 
     def get_help_text(self,id):
@@ -110,8 +111,9 @@ class ToolBarDialog(DialogNode):
     def _get_file_layout(self):
         layout = kytten.VerticalLayout([
             NoSelectMenu(
-                options=['-New', 'Open', 'Save', 'Quit'],
-                on_select=self._on_button_click)
+                options     = ['-New', 'Open', 'Save', 'Quit'],
+                on_select   = self._on_button_click
+                )
 #                    Button("Open",id ="open", on_click=self._on_button_click),
 #                    Button("Save",id ="save", on_click=self._on_button_click),
 #                    Button("Quit",id ="quit", on_click=self._on_button_click)

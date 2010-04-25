@@ -98,9 +98,10 @@ class DialogLayer(cocos.layer.Layer):
                 return True
 
     def on_text(self, text):
-         for c in self.batchnode.get_children():
-            if c.dialog.focus and hasattr(c.dialog.focus, 'on_text'):
-                return True
+         pass
+#         for c in self.batchnode.get_children():
+#            if c.dialog.focus and hasattr(c.dialog.focus, 'on_text'):
+#                return True
 
     def on_text_motion(self, motion):
         for c in self.batchnode.get_children():

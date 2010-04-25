@@ -170,6 +170,13 @@ class MapEditorScene(cocos.scene.Scene):
                     on_open = self.on_file_open_clicked
                     )
                 )
+        elif id == "Save":
+            self.save_map()
+            self.dialog_layer.add_dialog(
+                blobedit_dialogs.PopupMessage(
+                    "File Saved"
+                    )
+                )
         elif id == "Quit":
             director.pop()
         else:
@@ -179,6 +186,7 @@ class MapEditorScene(cocos.scene.Scene):
         print file
         self.last_path = os.path.dirname(file)
         self.load_xml(file)
+        
     def on_tool_select(self,id):
         if(hasattr(self, 'toolbar')):
             self.statusbar.set_text(self.toolbar.get_help_text(id))
@@ -250,8 +258,13 @@ class MapEditorScene(cocos.scene.Scene):
 #            print "t is %s"%t
 #            print dir(t)
         self.reload_tileset()
-        print self.tilesets
+        self.level_xml = level_xml
+        self.level_edited = level
+#        print self.tilesets
 
+    def save_map(self):
+        self.level_edited.save_xml(self.level_xml)
+        
     def reload_tileset(self):
         if self.tilebar != None:
             self.tilebar.delete()
