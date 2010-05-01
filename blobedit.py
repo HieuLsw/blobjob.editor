@@ -4,5 +4,5 @@ import sys
 # preferrence for the included libs
 sys.path.insert(0, 'libs')
 
-from gamelib import main
+from editor import main
 main.main()
